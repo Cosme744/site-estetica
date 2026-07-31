@@ -62,8 +62,41 @@ h1,h2,h3{font-family:var(--serif);font-weight:300;line-height:1.16;letter-spacin
 .sub{color:var(--cinza);max-width:54ch;font-size:1.08rem;line-height:1.75}
 
 /* ---------- Logotipo lótus ---------- */
+.lotus,.ic-serv{fill:none;stroke:var(--dourado);stroke:url(#ouro);stroke-width:1.05;stroke-linecap:round;stroke-linejoin:round}
 .lotus{width:34px;height:34px;flex:none}
-.lotus path{fill:none;stroke:var(--dourado);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.ic-serv{width:31px;height:31px;margin-bottom:1.1rem;stroke-width:1.3;transition:.45s cubic-bezier(.2,.8,.2,1)}
+.card:hover .ic-serv{transform:translateY(-4px) scale(1.08);filter:drop-shadow(0 0 9px rgba(201,163,90,.55))}
+
+/* ===== animações ===== */
+@keyframes tracar{to{stroke-dashoffset:0}}
+@keyframes respirar{0%,100%{filter:drop-shadow(0 0 6px rgba(201,163,90,.28))}50%{filter:drop-shadow(0 0 16px rgba(201,163,90,.6))}}
+@keyframes flutuar{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes brilho{to{left:135%}}
+
+.lotus-hero{width:62px;height:62px;margin:0 auto 1.5rem;animation:flutuar 6s ease-in-out 2.6s infinite}
+.lotus-hero path{stroke-dasharray:70;stroke-dashoffset:70;animation:tracar 1.5s cubic-bezier(.35,.85,.3,1) forwards}
+.lotus-hero path:nth-child(1){animation-delay:.15s}
+.lotus-hero path:nth-child(2){animation-delay:.3s}
+.lotus-hero path:nth-child(3){animation-delay:.45s}
+.lotus-hero path:nth-child(4){animation-delay:.6s}
+.lotus-hero path:nth-child(5){animation-delay:.75s}
+.lotus-hero path:nth-child(6){animation-delay:.95s}
+
+.marca .lotus{animation:respirar 5.5s ease-in-out infinite}
+.cta-box .lotus{animation:respirar 5.5s ease-in-out infinite}
+.insta-box .lotus{animation:respirar 6.5s ease-in-out infinite}
+footer .lotus{transition:.5s}
+footer .lotus:hover{transform:rotate(-6deg) scale(1.12)}
+
+.btn-ouro{position:relative;overflow:hidden}
+.btn-ouro::after{content:"";position:absolute;top:0;left:-130%;width:55%;height:100%;pointer-events:none;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-18deg)}
+.btn-ouro:hover::after{animation:brilho .85s ease}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .lotus-hero path{stroke-dashoffset:0}
+}
 
 /* ---------- Botões ---------- */
 .btn{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 2.2rem;border-radius:999px;
@@ -136,7 +169,7 @@ section{padding:clamp(4.5rem,10vw,8rem) 0}
   letter-spacing:.03em;pointer-events:none;
 }
 .selo .lotus{width:16px;height:16px}
-.selo .lotus path{stroke-width:1.8}
+.selo .lotus{stroke-width:1.7}
 
 /* ---------- Sobre ---------- */
 .sobre{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(2rem,6vw,5rem);align-items:center}
@@ -161,7 +194,7 @@ section{padding:clamp(4.5rem,10vw,8rem) 0}
 .card::before{content:"";position:absolute;top:0;left:0;height:2px;width:0;background:var(--dourado);transition:.5s}
 .card:hover{transform:translateY(-8px);border-color:rgba(201,163,90,.5)}
 .card:hover::before{width:100%}
-.card .lotus{width:26px;height:26px;margin-bottom:1rem}
+
 .card h3{font-size:1.78rem;margin-bottom:.9rem;color:var(--creme)}
 .card ul{list-style:none;color:var(--cinza);font-size:1.02rem}
 .card li{padding:.44rem 0 .44rem 1.4rem;position:relative;border-bottom:1px dashed rgba(255,255,255,.05)}
@@ -199,9 +232,9 @@ section{padding:clamp(4.5rem,10vw,8rem) 0}
 .grid-cont{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,4.5rem);align-items:center}
 .info-item{display:flex;gap:1.1rem;padding:1.25rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
 .info-item:last-of-type{border-bottom:0}
-.info-item .ic{flex:none;width:23px;height:23px;margin-top:.25rem;color:var(--dourado)}
-.ic-linha path,.ic-linha circle{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.ic-cheio path{fill:currentColor}
+.info-item .ic{flex:none;width:23px;height:23px;margin-top:.3rem;color:var(--dourado)}
+.ic-linha{fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.ic-cheio{fill:currentColor}
 .horarios{margin-top:.15rem}
 .horarios div{display:flex;align-items:baseline;gap:.7rem;padding:.3rem 0}
 .horarios dt{color:var(--cinza);font-size:.95rem;white-space:nowrap}
@@ -277,16 +310,25 @@ footer .redes svg{width:18px;height:18px;fill:currentColor}
 
 <!-- Logotipo lótus reutilizável -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="lotus" viewBox="0 0 100 100">
-    <g transform="translate(50,62)">
-      <path d="M0,-46 C11,-26 11,-6 0,12 C-11,-6 -11,-26 0,-46 Z"/>
-      <path d="M0,-46 C11,-26 11,-6 0,12 C-11,-6 -11,-26 0,-46 Z" transform="rotate(34) scale(.92)"/>
-      <path d="M0,-46 C11,-26 11,-6 0,12 C-11,-6 -11,-26 0,-46 Z" transform="rotate(-34) scale(.92)"/>
-      <path d="M0,-40 C14,-22 14,-4 0,12 C-14,-4 -14,-22 0,-40 Z" transform="rotate(66) scale(.86)"/>
-      <path d="M0,-40 C14,-22 14,-4 0,12 C-14,-4 -14,-22 0,-40 Z" transform="rotate(-66) scale(.86)"/>
-      <path d="M-34,12 C-18,23 18,23 34,12"/>
+  <defs>
+    <linearGradient id="ouro" x1="0" y1="0" x2=".6" y2="1">
+      <stop offset="0" stop-color="#f2e0b6"/><stop offset=".48" stop-color="#c9a35a"/><stop offset="1" stop-color="#9c7833"/>
+    </linearGradient>
+  </defs>
+  <symbol id="lotus" viewBox="0 0 24 24">
+    <g transform="translate(12,16.6)">
+      <path d="M0-11.8c2.6 3.2 3.9 6 3.9 8.4 0 1.9-1.3 3.4-3.9 4.6-2.6-1.2-3.9-2.7-3.9-4.6 0-2.4 1.3-5.2 3.9-8.4Z" transform="rotate(68) scale(.95)"/>
+      <path d="M0-11.8c2.6 3.2 3.9 6 3.9 8.4 0 1.9-1.3 3.4-3.9 4.6-2.6-1.2-3.9-2.7-3.9-4.6 0-2.4 1.3-5.2 3.9-8.4Z" transform="rotate(-68) scale(.95)"/>
+      <path d="M0-12.6c1.9 2.9 2.85 5.5 2.85 7.8 0 1.8-.95 3.4-2.85 4.8-1.9-1.4-2.85-3-2.85-4.8 0-2.3.95-4.9 2.85-7.8Z" transform="rotate(31) scale(.9)"/>
+      <path d="M0-12.6c1.9 2.9 2.85 5.5 2.85 7.8 0 1.8-.95 3.4-2.85 4.8-1.9-1.4-2.85-3-2.85-4.8 0-2.3.95-4.9 2.85-7.8Z" transform="rotate(-31) scale(.9)"/>
+      <path d="M0-13.4c2.1 3.1 3.15 5.9 3.15 8.4 0 1.9-1.05 3.6-3.15 5-2.1-1.4-3.15-3.1-3.15-5 0-2.5 1.05-5.3 3.15-8.4Z"/>
+      <path d="M0-6.6c1.15 1.9 1.72 3.5 1.72 4.8 0 1.1-.57 2-1.72 2.8-1.15-.8-1.72-1.7-1.72-2.8 0-1.3.57-2.9 1.72-4.8Z"/>
     </g>
   </symbol>
+  <symbol id="ic-folha" viewBox="0 0 24 24"><path d="M20.4 3.6c.4 8.6-4.6 14.2-12.6 14.4-2.6 0-4.2-1.4-4.2-3.8C3.6 7.4 9.6 3.2 20.4 3.6Z"/><path d="M17.4 6.6C12 9 8.4 13.2 6.4 20.4" stroke-opacity=".65"/></symbol>
+  <symbol id="ic-gota" viewBox="0 0 24 24"><path d="M12 3.2c3.7 4.2 5.6 7.2 5.6 9.6a5.6 5.6 0 1 1-11.2 0c0-2.4 1.9-5.4 5.6-9.6Z"/><path d="M9.3 13.6a2.8 2.8 0 0 0 2.3 2.7" stroke-opacity=".65"/></symbol>
+  <symbol id="ic-rosto" viewBox="0 0 24 24"><path d="M17.4 3.9a7.6 7.6 0 0 0-9.8 9.4l-1.7 2.4c-.4.6-.1 1.3.6 1.5l1.6.4v2.1c0 .9.8 1.6 1.7 1.5l3.2-.3"/><path d="M12.9 9.4h.02" stroke-width="2"/><path d="M11.3 16.6c1.4.5 2.8.4 4.1-.3" stroke-opacity=".65"/></symbol>
+  <symbol id="ic-faisca" viewBox="0 0 24 24"><path d="M13.4 2.6c.9 4.9 2.2 6.2 7.1 7.1-4.9.9-6.2 2.2-7.1 7.1-.9-4.9-2.2-6.2-7.1-7.1 4.9-.9 6.2-2.2 7.1-7.1Z"/><path d="M6.2 15.4c.4 2.1 1 2.7 3.1 3.1-2.1.4-2.7 1-3.1 3.1-.4-2.1-1-2.7-3.1-3.1 2.1-.4 2.7-1 3.1-3.1Z" stroke-opacity=".6"/></symbol>
   <symbol id="ic-pin" viewBox="0 0 24 24">
     <path d="M12 21.2c4.2-4.4 6.3-7.7 6.3-10.2a6.3 6.3 0 1 0-12.6 0c0 2.5 2.1 5.8 6.3 10.2Z"/>
     <circle cx="12" cy="10.7" r="2.5"/>
@@ -295,7 +337,7 @@ footer .redes svg{width:18px;height:18px;fill:currentColor}
     <circle cx="12" cy="12" r="8.6"/><path d="M12 6.6v5.7l3.7 2.2"/>
   </symbol>
   <symbol id="ic-zap" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.463 3.488"/></symbol>
-  <symbol id="ic-insta" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.1a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z" fill-rule="evenodd"/></symbol>
+  <symbol id="ic-insta" viewBox="0 0 24 24"><path d="M7.0301.084c-1.2768.0602-2.1487.2652-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.2652 2.1482.5635 2.9107.3079.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.3802.7632.2953 1.6361.4961 2.9134.552 1.2773.0559 1.6884.0687 4.9462.0625 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.1478-.2652 2.9105-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.0555-1.2809.0688-1.6898.0626-4.948-.0063-3.2583-.0208-3.6668-.0815-4.9465-.0606-1.2797-.2651-2.1482-.5633-2.9111-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.6284.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.0056 11.977.0006 8.718.0068 8.31.0212 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.1561 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></symbol>
 </svg>
 
 <!-- ══════════ CABEÇALHO ══════════ -->
@@ -322,7 +364,16 @@ footer .redes svg{width:18px;height:18px;fill:currentColor}
   <div class="hero-foto"></div>
   <div class="hero-veu"></div>
   <div class="wrap reveal">
-    <svg class="lotus"><use href="#lotus"/></svg>
+    <svg class="lotus lotus-hero" viewBox="0 0 24 24" aria-hidden="true">
+      <g transform="translate(12,16.6)">
+      <path d="M0-11.8c2.6 3.2 3.9 6 3.9 8.4 0 1.9-1.3 3.4-3.9 4.6-2.6-1.2-3.9-2.7-3.9-4.6 0-2.4 1.3-5.2 3.9-8.4Z" transform="rotate(68) scale(.95)"/>
+      <path d="M0-11.8c2.6 3.2 3.9 6 3.9 8.4 0 1.9-1.3 3.4-3.9 4.6-2.6-1.2-3.9-2.7-3.9-4.6 0-2.4 1.3-5.2 3.9-8.4Z" transform="rotate(-68) scale(.95)"/>
+      <path d="M0-12.6c1.9 2.9 2.85 5.5 2.85 7.8 0 1.8-.95 3.4-2.85 4.8-1.9-1.4-2.85-3-2.85-4.8 0-2.3.95-4.9 2.85-7.8Z" transform="rotate(31) scale(.9)"/>
+      <path d="M0-12.6c1.9 2.9 2.85 5.5 2.85 7.8 0 1.8-.95 3.4-2.85 4.8-1.9-1.4-2.85-3-2.85-4.8 0-2.3.95-4.9 2.85-7.8Z" transform="rotate(-31) scale(.9)"/>
+      <path d="M0-13.4c2.1 3.1 3.15 5.9 3.15 8.4 0 1.9-1.05 3.6-3.15 5-2.1-1.4-3.15-3.1-3.15-5 0-2.5 1.05-5.3 3.15-8.4Z"/>
+      <path d="M0-6.6c1.15 1.9 1.72 3.5 1.72 4.8 0 1.1-.57 2-1.72 2.8-1.15-.8-1.72-1.7-1.72-2.8 0-1.3.57-2.9 1.72-4.8Z"/>
+      </g>
+    </svg>
     <p class="olho">Massagem e Estética · João Pessoa/PB</p>
     <h1>Beleza que transforma,<br><em>toque que acolhe</em></h1>
     <p>Cuidar de você é a nossa essência. Massagens terapêuticas, drenagem e tratamentos faciais com técnica, higiene e resultado.</p>
@@ -398,7 +449,7 @@ footer .redes svg{width:18px;height:18px;fill:currentColor}
     <div class="grid-serv reveal">
 
       <div class="card zap" data-msg="Olá! Tenho interesse nas MASSAGENS. Pode me passar mais informações?">
-        <svg class="lotus"><use href="#lotus"/></svg>
+        <svg class="ic-serv"><use href="#ic-folha"/></svg>
         <h3>Massoterapia</h3>
         <ul>
           <li>Massagem relaxante</li>
@@ -412,7 +463,7 @@ footer .redes svg{width:18px;height:18px;fill:currentColor}
       </div>
 
       <div class="card zap" data-msg="Olá! Tenho interesse em DRENAGEM / pós-operatório. Pode me passar mais informações?">
-        <svg class="lotus"><use href="#lotus"/></svg>
+        <svg class="ic-serv"><use href="#ic-gota"/></svg>
         <h3>Drenagem & Pós-operatório</h3>
         <ul>
           <li>Drenagem linfática</li>
@@ -425,7 +476,7 @@ footer .redes svg{width:18px;height:18px;fill:currentColor}
       </div>
 
       <div class="card zap" data-msg="Olá! Tenho interesse nos tratamentos FACIAIS. Pode me passar mais informações?">
-        <svg class="lotus"><use href="#lotus"/></svg>
+        <svg class="ic-serv"><use href="#ic-rosto"/></svg>
         <h3>Estética Facial</h3>
         <ul>
           <li>Limpeza de pele profunda</li>
@@ -439,7 +490,7 @@ footer .redes svg{width:18px;height:18px;fill:currentColor}
       </div>
 
       <div class="card zap" data-msg="Olá! Tenho interesse em JATO DE PLASMA / retirada de sinais. Pode me passar mais informações?">
-        <svg class="lotus"><use href="#lotus"/></svg>
+        <svg class="ic-serv"><use href="#ic-faisca"/></svg>
         <h3>Jato de Plasma</h3>
         <ul>
           <li>Retirada de sinais e verrugas</li>
@@ -498,7 +549,7 @@ footer .redes svg{width:18px;height:18px;fill:currentColor}
       <p class="insta-user">@dradabelezapb</p>
       <p class="insta-txt">Antes e depois, bastidores dos atendimentos e dicas de cuidado com a pele.</p>
       <a class="btn btn-linha" href="https://instagram.com/dradabelezapb" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.1a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z" fill-rule="evenodd"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M7.0301.084c-1.2768.0602-2.1487.2652-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.2652 2.1482.5635 2.9107.3079.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.3802.7632.2953 1.6361.4961 2.9134.552 1.2773.0559 1.6884.0687 4.9462.0625 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.1478-.2652 2.9105-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.0555-1.2809.0688-1.6898.0626-4.948-.0063-3.2583-.0208-3.6668-.0815-4.9465-.0606-1.2797-.2651-2.1482-.5633-2.9111-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.6284.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.0056 11.977.0006 8.718.0068 8.31.0212 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.1561 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>
         Ver no Instagram
       </a>
     </div>
@@ -605,7 +656,7 @@ footer .redes svg{width:18px;height:18px;fill:currentColor}
     <svg class="lotus"><use href="#lotus"/></svg>
     <div class="redes">
       <a href="https://instagram.com/dradabelezapb" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.1a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z" fill-rule="evenodd"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M7.0301.084c-1.2768.0602-2.1487.2652-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.2652 2.1482.5635 2.9107.3079.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.3802.7632.2953 1.6361.4961 2.9134.552 1.2773.0559 1.6884.0687 4.9462.0625 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.1478-.2652 2.9105-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.0555-1.2809.0688-1.6898.0626-4.948-.0063-3.2583-.0208-3.6668-.0815-4.9465-.0606-1.2797-.2651-2.1482-.5633-2.9111-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.6284.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.0056 11.977.0006 8.718.0068 8.31.0212 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.1561 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>
       </a>
       <a class="zap" data-msg="Olá Suellem! Vim pelo site." aria-label="WhatsApp">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.463 3.488"/></svg>
